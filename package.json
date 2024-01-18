@@ -1,13 +1,25 @@
 {
-  "name": "ts-utils",
-  "version": "1.0.0",
+  "name": "@jrposada/ts-utils",
+  "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jrposada/pm-creds.git"
+  },
+  "type": "module",
+  "types": "src/index.d.ts",
+  "author": {
+    "email": "jrposada.dev@gmail.com",
+    "name": "Javier Rodriguez Posada"
+  },
+  "license": "ISC",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Javier Rodriguez Posada",
-  "dependencies": {
+  "peerDependencies": {
     "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.4"
   }
 }

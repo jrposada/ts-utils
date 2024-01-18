@@ -5,6 +5,5 @@ type ExampleType = Promise<string>;
 
 type A = Expect<IsEqual<MyAwaited<ExampleType>, string>>;
 
-export type MyAwaited<T extends Promise<any>> = T extends Promise<infer R>
-  ? R
-  : never;
+export type MyAwaited<T extends Promise<any>> =
+  T extends Promise<infer R> ? R : never;
