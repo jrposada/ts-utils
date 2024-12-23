@@ -1,5 +1,5 @@
-import { Expect } from "./expect";
-import { Not } from "./not";
+import { Expect } from './expect';
+import { Not } from './not';
 
 type A = Expect<IsFalse<false>>;
 type B = Expect<Not<IsFalse<true>>>;
