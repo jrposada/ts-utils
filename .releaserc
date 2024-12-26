@@ -1,0 +1,28 @@
+{
+    "branches": [
+        "main"
+    ],
+    "plugins": [
+        "@semantic-release/commit-analyzer",
+        "@semantic-release/release-notes-generator",
+        [
+            "@semantic-release/github",
+            {
+                "assets": [
+                    {
+                        "path": "./binaries/macos-latest/*.dmg",
+                        "label": "Mac OS (Apple Silicon)"
+                    },
+                    {
+                        "path": "./binaries/macos-13/*.dmg",
+                        "label": "Mac OS (Intel)"
+                    },
+                    {
+                        "path": "./binaries/windows-latest/*.msi",
+                        "label": "Windows"
+                    }
+                ]
+            }
+        ]
+    ]
+}

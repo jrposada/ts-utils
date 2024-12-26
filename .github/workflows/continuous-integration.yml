@@ -12,26 +12,61 @@ jobs:
   lint-eslint:
     name: 'Lint: ESLint'
     uses: jrposada/github-actions/.github/workflows/npm-script.yml@v1
-    secrets: inherit
     with:
       script: 'lint:eslint'
 
   lint-format:
     name: 'Lint: Format'
     uses: jrposada/github-actions/.github/workflows/npm-script.yml@v1
-    secrets: inherit
     with:
       script: 'lint:format'
 
   lint-types:
     name: 'Lint: Types'
     uses: jrposada/github-actions/.github/workflows/npm-script.yml@v1
-    secrets: inherit
     with:
       script: 'lint:types'
+
+  lint-commits:
+    name: 'Lint: Commits'
+    uses: jrposada/github-actions/.github/workflows/conventional-commits.yml@v1
 
   test-unit:
     name: 'Test: Unit'
     uses: jrposada/github-actions/.github/workflows/npm-script.yml@v1
     with:
       script: 'test:coverage'
+
+  get-version:
+    name: Get version
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: jrposada/github-actions/.github/workflows/semantic-release.yml@v1
+    with:
+      dry-run: true
+
+  build:
+    name: 'Build'
+    needs: ['get-version']
+    uses: jrposada/github-actions/.github/workflows/tauri-build.yml@v1
+    with:
+      version: ${{ needs.get-version.outputs.version }}
+      bundle-folder: ./src-tauri/target/release/bundle
+      artifact-name: binary
+      script: tauri build
+
+  release:
+    name: Release
+    needs: [lint-eslint, lint-format, lint-commits, test-unit, build]
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: jrposada/github-actions/.github/workflows/semantic-release.yml@v1
+    with:
+      artifact-name-1: binary-macos-latest
+      artifact-path-1: ./binaries/macos-latest
+      artifact-name-2: binary-macos-13
+      artifact-path-2: ./binaries/macos-13
+      artifact-name-3: binary-windows-latest
+      artifact-path-3: ./binaries/windows-latest
