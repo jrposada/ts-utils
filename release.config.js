@@ -3,8 +3,9 @@
  */
 export default {
     branches: [
+        'main',
         {
-            name: 'main',
+            name: 'beta',
             prerelease: true,
         },
     ],
