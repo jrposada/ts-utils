@@ -49,12 +49,11 @@ jobs:
   build:
     name: 'Build'
     needs: ['get-version']
-    uses: jrposada/github-actions/.github/workflows/tauri-build.yml@v2
+    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v2
     with:
-      version: ${{ needs.get-version.outputs.version }}
-      bundle-folder: ./src-tauri/target/release/bundle
-      artifact-name: binary
-      script: tauri build
+      script: build
+      artifact-name: lib
+      artifact-path: ./dist
 
   release:
     name: Release
