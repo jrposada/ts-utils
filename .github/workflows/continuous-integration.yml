@@ -59,7 +59,15 @@ jobs:
   release:
     name: Release
     needs:
-      [lint-eslint, lint-format, lint-commits, test-unit, get-version, build]
+      [
+        lint-eslint,
+        lint-format,
+        lint-types,
+        lint-commits,
+        test-unit,
+        get-version,
+        build,
+      ]
     permissions:
       contents: write
       pull-requests: write

@@ -41,7 +41,9 @@
     "lint:eslint": "eslint .",
     "lint:format": "prettier . --check",
     "lint:types": "tsc --noEmit",
-    "lint": "run-p lint:*"
+    "lint": "run-p lint:*",
+    "test:coverage": "echo TODO",
+    "test": "echo TODO"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
