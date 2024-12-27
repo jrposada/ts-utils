@@ -11,27 +11,66 @@ on:
 jobs:
   lint-eslint:
     name: 'Lint: ESLint'
-    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v1
-    secrets: inherit
+    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v2
     with:
       script: 'lint:eslint'
 
   lint-format:
     name: 'Lint: Format'
-    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v1
-    secrets: inherit
+    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v2
     with:
       script: 'lint:format'
 
   lint-types:
     name: 'Lint: Types'
-    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v1
-    secrets: inherit
+    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v2
     with:
       script: 'lint:types'
 
+  lint-commits:
+    name: 'Lint: Commits'
+    uses: jrposada/github-actions/.github/workflows/conventional-commits.yml@v2
+
   test-unit:
     name: 'Test: Unit'
-    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v1
+    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v2
     with:
       script: 'test:coverage'
+
+  get-version:
+    name: Get version
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: jrposada/github-actions/.github/workflows/semantic-release.yml@v2
+    with:
+      dry-run: true
+
+  build:
+    name: 'Build'
+    needs: ['get-version']
+    uses: jrposada/github-actions/.github/workflows/npm-script.yml@v2
+    with:
+      script: build
+      artifact-name: lib
+      artifact-path: ./dist
+
+  release:
+    name: Release
+    needs:
+      [
+        lint-eslint,
+        lint-format,
+        lint-types,
+        lint-commits,
+        test-unit,
+        get-version,
+        build,
+      ]
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: jrposada/github-actions/.github/workflows/semantic-release.yml@v2
+    with:
+      artifact-name: lib
+      artifact-path: ./dist

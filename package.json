@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jrposada/pm-creds.git"
+    "url": "https://github.com/jrposada/ts-utils.git"
   },
   "scripts": {
     "build": "tsc -p tsconfig.lib.json && tsc -p tsconfig.lib.json -m ESNext --outDir dist/lib/esm",
@@ -41,12 +41,16 @@
     "lint:eslint": "eslint .",
     "lint:format": "prettier . --check",
     "lint:types": "tsc --noEmit",
-    "lint": "run-p lint:*"
+    "lint": "run-p lint:*",
+    "test:coverage": "echo TODO",
+    "test": "echo TODO"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
     "eslint": "^9.17.0",
     "husky": "^9.1.7",
     "npm-run-all": "^4.1.5",
