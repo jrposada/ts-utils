@@ -73,4 +73,4 @@ jobs:
     uses: jrposada/github-actions/.github/workflows/semantic-release.yml@v2
     with:
       artifact-name: lib
-      artifact-path: ./jrposada-ts-util-${{ needs.get-version.outputs.version }}.tgz
+      artifact-path: ./dist
