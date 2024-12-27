@@ -12,15 +12,11 @@ export default {
     plugins: [
         '@semantic-release/commit-analyzer',
         '@semantic-release/release-notes-generator',
+        ['@semantic-release/npm', {}],
         [
             '@semantic-release/github',
             {
-                assets: [
-                    {
-                        path: './jrposada-ts-utils-*.tgz',
-                        label: 'lib',
-                    },
-                ],
+                assets: '*.tgz',
             },
         ],
     ],
