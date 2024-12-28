@@ -45,6 +45,7 @@ jobs:
       contents: write
       pull-requests: write
     uses: jrposada/github-actions/.github/workflows/semantic-release.yml@v2
+    secrets: inherit
     with:
       dry-run: true
 
@@ -73,6 +74,7 @@ jobs:
       contents: write
       pull-requests: write
     uses: jrposada/github-actions/.github/workflows/semantic-release.yml@v2
+    secrets: inherit
     with:
       artifact-name: lib
       artifact-path: ./dist
