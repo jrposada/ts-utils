@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - beta
   pull_request:
     branches:
       - main
+      - beta
 
 jobs:
   lint-eslint:
@@ -43,6 +45,8 @@ jobs:
       contents: write
       pull-requests: write
     uses: jrposada/github-actions/.github/workflows/semantic-release.yml@v2
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     with:
       dry-run: true
 
@@ -71,6 +75,8 @@ jobs:
       contents: write
       pull-requests: write
     uses: jrposada/github-actions/.github/workflows/semantic-release.yml@v2
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     with:
       artifact-name: lib
       artifact-path: ./dist
